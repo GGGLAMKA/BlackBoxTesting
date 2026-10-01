@@ -1,1 +1,124 @@
+name: Отчет о дефекте
+description: Шаблон для оформления отчета об обнаруженном дефекте
+title: "[Ошибка]: "
+labels: ["bug"]
+body:
+  # 1. Markdown-блок с приветствием и инструкцией
+  - type: markdown
+    attributes:
+      value: |
+        ## Спасибо, что помогаете улучшить приложение!
+        Перед созданием отчета, пожалуйста, заполните все поля максимально подробно.
+        Поля, отмеченные как обязательные, нельзя оставить пустыми.
 
+  # 2. Флажок подтверждения, что пользователь ознакомился с существующими отчетами
+  - type: checkboxes
+    id: existing_issues
+    attributes:
+      label: Проверка существующих отчетов
+      description: Перед созданием нового отчета убедитесь, что похожий дефект еще не был зарегистрирован.
+      options:
+        - label: Я ознакомился с существующими отчетами о дефектах и не нашел дубликата
+          required: true
+
+  # 3. Заголовок
+  - type: textarea
+    id: title_field
+    attributes:
+      label: Заголовок
+      description: Кратко сформулируйте суть дефекта
+      placeholder: 'Например, "Кнопка «Войти» не реагирует на нажатие"'
+    validations:
+      required: true
+
+  # 4. Описание
+  - type: textarea
+    id: description
+    attributes:
+      label: Описание
+      description: Подробно опишите проблему
+      placeholder: Опишите, что происходит и почему это является дефектом
+    validations:
+      required: true
+
+  # 5. Предусловия
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: Предусловия
+      description: Что должно быть выполнено перед воспроизведением
+      placeholder: 'Например, "Пользователь авторизован", "Открыта главная страница"'
+    validations:
+      required: false
+
+  # 6. Шаги воспроизведения
+  - type: textarea
+    id: steps
+    attributes:
+      label: Шаги воспроизведения
+      description: Пошагово опишите действия для воспроизведения дефекта
+      placeholder: |
+        1. Открыть страницу ...
+        2. Нажать на ...
+        3. Ввести ...
+    validations:
+      required: true
+
+  # 7. Ожидаемый результат
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидаемый результат
+      description: Что должно происходить при корректной работе
+      placeholder: Опишите ожидаемое поведение
+    validations:
+      required: true
+
+  # 8. Фактический результат
+  - type: textarea
+    id: actual
+    attributes:
+      label: Фактический результат
+      description: Что происходит на самом деле
+      placeholder: Опишите фактическое поведение
+    validations:
+      required: true
+
+  # 9. Скриншоты / Доп. материалы
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Скриншоты / Доп. материалы
+      description: Прикрепите скриншоты, видео или логи
+      placeholder: Перетащите файлы сюда или вставьте ссылки
+    validations:
+      required: false
+
+  # 10. Приоритет (выпадающий список)
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Приоритет
+      description: Насколько срочно нужно исправить дефект
+      options:
+        - Низкий
+        - Средний
+        - Высокий
+        - Критический
+    validations:
+      required: true
+
+  # 11. Серьезность (выпадающий список)
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Серьезность
+      description: Насколько серьезен дефект с точки зрения влияния на функциональность
+      options:
+        - Trivial (косметический)
+        - Minor (незначительный)
+        - Major (значительный)
+        - Critical (критический)
+        - Blocker (блокирующий)
+    validations:
+      required: true
